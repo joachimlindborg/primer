@@ -45,10 +45,14 @@ primer_step_beagle() {
                 "debian")
                     _primer_step_beagle_install_base
                     # turn of cloud9
- 
+                    $PRIMER_OS_SUDO systemctl disable cloud9.service
+                    $PRIMER_OS_SUDO systemctl stop cloud9.service || true 
+                    $PRIMER_OS_SUDO systemctl stop cloud9.socket || true 
+
                     # change hostname
                     $PRIMER_OS_SUDO sudo echo '$PRIMER_STEP_BEAGLE_HOSTNAME' > /etc/hostname
                     # change the hosts file with sed change beaglebone
+                    
                     
                     # change user debian password
                     password=$(yush_password "$PRIMER_STEP_RASPI_PWLEN")
